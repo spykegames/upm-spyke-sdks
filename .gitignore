@@ -1,0 +1,19 @@
+# Unity meta files are important for packages
+# DO NOT ignore *.meta files
+
+# IDE
+.idea/
+.vs/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Build artifacts
+*.dll
+*.pdb
+
+# Test results
+TestResults/

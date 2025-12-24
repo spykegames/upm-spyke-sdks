@@ -1,0 +1,17 @@
+{
+    "name": "Spyke.SDKs",
+    "rootNamespace": "Spyke.SDKs",
+    "references": [
+        "Spyke.Core",
+        "Spyke.Services"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

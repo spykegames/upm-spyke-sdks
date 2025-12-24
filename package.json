@@ -1,0 +1,28 @@
+{
+  "name": "com.spykegames.sdks",
+  "displayName": "Spyke SDKs",
+  "version": "0.0.1-preview",
+  "unity": "6000.0",
+  "description": "Third-party SDK wrappers: IAP, Ads (AppLovin), Firebase, AppsFlyer, OneSignal.",
+  "author": {
+    "name": "Spyke Games",
+    "url": "https://github.com/spykegames"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spykegames/upm-spyke-sdks.git"
+  },
+  "keywords": [
+    "spyke",
+    "sdks",
+    "iap",
+    "ads",
+    "firebase",
+    "appsflyer",
+    "onesignal"
+  ],
+  "dependencies": {
+    "com.spykegames.core": "0.0.1-preview",
+    "com.spykegames.services": "0.0.1-preview"
+  }
+}
