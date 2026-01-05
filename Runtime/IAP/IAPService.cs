@@ -114,9 +114,9 @@ namespace Spyke.SDKs.IAP
         {
             if (!_isReady)
             {
-                var result = IAPResult.Failure(productId, IAPFailureReason.PurchasingUnavailable, "IAP not initialized");
+                var notReadyResult = IAPResult.Failure(productId, IAPFailureReason.PurchasingUnavailable, "IAP not initialized");
                 OnPurchaseFailed?.Invoke(productId, IAPFailureReason.PurchasingUnavailable);
-                return result;
+                return notReadyResult;
             }
 
             _purchaseTcs = new UniTaskCompletionSource<IAPResult>();
@@ -125,17 +125,17 @@ namespace Spyke.SDKs.IAP
             var storeProduct = _storeController.products.WithID(productId);
             if (storeProduct == null || !storeProduct.availableToPurchase)
             {
-                var result = IAPResult.Failure(productId, IAPFailureReason.ProductUnavailable);
-                _purchaseTcs.TrySetResult(result);
+                var unavailableResult = IAPResult.Failure(productId, IAPFailureReason.ProductUnavailable);
+                _purchaseTcs.TrySetResult(unavailableResult);
                 OnPurchaseFailed?.Invoke(productId, IAPFailureReason.ProductUnavailable);
-                return result;
+                return unavailableResult;
             }
 
             _storeController.InitiatePurchase(storeProduct);
 #else
-            var result = IAPResult.Failure(productId, IAPFailureReason.PurchasingUnavailable);
-            _purchaseTcs.TrySetResult(result);
-            return result;
+            var noIapResult = IAPResult.Failure(productId, IAPFailureReason.PurchasingUnavailable);
+            _purchaseTcs.TrySetResult(noIapResult);
+            return noIapResult;
 #endif
 
             return await _purchaseTcs.Task;
