@@ -27,11 +27,11 @@ upm-spyke-sdks/
 
 | Folder | Purpose | Status |
 |--------|---------|--------|
-| `Runtime/IAP/` | In-app purchase handling | To port |
-| `Runtime/Ads/` | Ad mediation (AppLovin MAX) | To port |
-| `Runtime/Firebase/` | Firebase Analytics & Crashlytics | To port |
-| `Runtime/AppsFlyer/` | Attribution tracking | To port |
-| `Runtime/OneSignal/` | Push notifications | To port |
+| `Runtime/IAP/` | In-app purchase handling | Done |
+| `Runtime/Ads/` | Ad mediation (AppLovin MAX) | Done |
+| `Runtime/Firebase/` | Firebase Analytics & Crashlytics | Done |
+| `Runtime/AppsFlyer/` | Attribution tracking | Done |
+| `Runtime/OneSignal/` | Push notifications | Done |
 
 ## How to Use
 
@@ -83,4 +83,22 @@ From `client-bootstrap`:
 | Firebase integration | `Runtime/Firebase/` |
 
 ## Status
-IN DEVELOPMENT - Structure ready, waiting for code port
+IN DEVELOPMENT - All SDK wrappers implemented
+
+### Completed
+- Firebase Analytics Provider (IFirebaseService, FirebaseAnalyticsProvider)
+- AppsFlyer Analytics Provider (IAppsFlyerService, AppsFlyerAnalyticsProvider)
+- IAP Service (IIAPService, IAPProduct, IAPResult, IReceiptValidator)
+- Ads Service (IAdService, IRewardedAdService, IInterstitialAdService, MaxRewardedService, MaxInterstitialService)
+- OneSignal Service (IOneSignalService, IPushPermissionHelper)
+- Release workflow (.github/workflows/release.yml)
+
+### Conditional Compilation
+All SDK wrappers use conditional compilation to avoid compile errors when native SDKs aren't installed:
+- `#if FIREBASE_ANALYTICS` - Firebase Analytics SDK
+- `#if APPSFLYER_SDK` - AppsFlyer SDK
+- `#if UNITY_PURCHASING` - Unity IAP
+- `#if APPLOVIN_MAX` - AppLovin MAX SDK
+- `#if ONESIGNAL_SDK` - OneSignal SDK
+
+Games define these symbols in Player Settings when they have the SDKs installed.

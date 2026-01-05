@@ -3,7 +3,9 @@
     "rootNamespace": "Spyke.SDKs",
     "references": [
         "Spyke.Core",
-        "Spyke.Services"
+        "Spyke.Services",
+        "Zenject",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
