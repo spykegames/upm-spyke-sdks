@@ -13,6 +13,7 @@ upm-spyke-sdks/
 │   ├── Firebase/         ← Analytics, Crashlytics wrappers
 │   ├── AppsFlyer/        ← Attribution wrapper
 │   ├── OneSignal/        ← Push notification wrapper
+│   ├── Facebook/         ← Facebook SDK auth wrapper
 │   └── Spyke.SDKs.asmdef
 ├── Editor/
 │   └── Spyke.SDKs.Editor.asmdef
@@ -32,6 +33,7 @@ upm-spyke-sdks/
 | `Runtime/Firebase/` | Firebase Analytics & Crashlytics | Done |
 | `Runtime/AppsFlyer/` | Attribution tracking | Done |
 | `Runtime/OneSignal/` | Push notifications | Done |
+| `Runtime/Facebook/` | Facebook SDK auth | Done |
 
 ## How to Use
 
@@ -91,6 +93,7 @@ IN DEVELOPMENT - All SDK wrappers implemented
 - IAP Service (IIAPService, IAPProduct, IAPResult, IReceiptValidator)
 - Ads Service (IAdService, IRewardedAdService, IInterstitialAdService, MaxRewardedService, MaxInterstitialService)
 - OneSignal Service (IOneSignalService, IPushPermissionHelper)
+- Facebook Auth Provider (FacebookAuthProvider implementing IFacebookAuthProvider)
 - Release workflow (.github/workflows/release.yml)
 
 ### Conditional Compilation
@@ -100,5 +103,6 @@ All SDK wrappers use conditional compilation to avoid compile errors when native
 - `#if UNITY_PURCHASING` - Unity IAP
 - `#if APPLOVIN_MAX` - AppLovin MAX SDK
 - `#if ONESIGNAL_SDK` - OneSignal SDK
+- `#if FACEBOOK_SDK` - Facebook SDK
 
 Games define these symbols in Player Settings when they have the SDKs installed.
