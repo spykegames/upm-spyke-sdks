@@ -97,11 +97,13 @@ IN DEVELOPMENT - All SDK wrappers implemented
 - OneSignal Service (IOneSignalService, IPushPermissionHelper)
 - Facebook Auth Provider (FacebookAuthProvider implementing IFacebookAuthProvider)
 - I2 Localization Service (I2LocalizationService implementing ILocalizationService)
+- Firebase Crashlytics Service (FirebaseCrashlyticsService implementing ICrashlyticsService)
 - Release workflow (.github/workflows/release.yml)
 
 ### Conditional Compilation
 All SDK wrappers use conditional compilation to avoid compile errors when native SDKs aren't installed:
 - `#if FIREBASE_ANALYTICS` - Firebase Analytics SDK
+- `#if FIREBASE_CRASHLYTICS` - Firebase Crashlytics SDK
 - `#if APPSFLYER_SDK` - AppsFlyer SDK
 - `#if UNITY_PURCHASING` - Unity IAP
 - `#if APPLOVIN_MAX` - AppLovin MAX SDK
