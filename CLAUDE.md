@@ -87,19 +87,35 @@ From `client-bootstrap`:
 | Firebase integration | `Runtime/Firebase/` |
 
 ## Status
-IN DEVELOPMENT - All SDK wrappers implemented
+✅ **COMPLETE** - All SDK wrappers implemented (29 files)
+
+### Architecture Decision: Redesigned vs Direct Port
+This package was **intentionally redesigned** from client-bootstrap, NOT directly ported:
+- Uses UniTask instead of Task (consistent with Project Genesis)
+- Cleaner interfaces with proper events (vs Action properties)
+- Simplified file structure (29 files vs 60+ in client-bootstrap)
+- Game-specific code left to game layer (credential sync, analytics caches, ad handlers)
 
 ### Completed
-- Firebase Analytics Provider (IFirebaseService, FirebaseAnalyticsProvider)
-- AppsFlyer Analytics Provider (IAppsFlyerService, AppsFlyerAnalyticsProvider)
-- IAP Service (IIAPService, IAPProduct, IAPResult, IReceiptValidator)
-- Ads Service (IAdService, IRewardedAdService, IInterstitialAdService, MaxRewardedService, MaxInterstitialService)
-- OneSignal Service (IOneSignalService, IPushPermissionHelper)
-- Facebook Auth Provider (FacebookAuthProvider implementing IFacebookAuthProvider)
-- I2 Localization Service (I2LocalizationService implementing ILocalizationService)
-- Firebase Crashlytics Service (FirebaseCrashlyticsService implementing ICrashlyticsService)
-- Firebase Remote Config Service (FirebaseRemoteConfigService implementing IRemoteConfigService)
-- Release workflow (.github/workflows/release.yml)
+- **Firebase** (5 files): IFirebaseService, FirebaseService, FirebaseAnalyticsProvider, FirebaseCrashlyticsService, FirebaseRemoteConfigService
+- **AppsFlyer** (5 files): IAppsFlyerService, IAppsFlyerConversionService, AppsFlyerConversionData, AppsFlyerAnalyticsProvider, AppsFlyerService
+- **IAP** (5 files): IIAPService, IAPProduct, IAPResult, IReceiptValidator, IAPService
+- **Ads** (8 files): IAdService, IRewardedAdService, IInterstitialAdService, IAdConsentService, AdResult, AdPlacement, MaxRewardedService, MaxInterstitialService
+- **OneSignal** (4 files): IOneSignalService, IPushPermissionHelper, NotificationData, OneSignalService
+- **Facebook** (1 file): FacebookAuthProvider
+- **Localization** (1 file): I2LocalizationService
+
+### Files NOT Ported (By Design - Game Layer)
+
+| client-bootstrap File | Reason | Where to Implement |
+|----------------------|--------|-------------------|
+| `AppsFlyerInviteLinkService.cs` | Game-specific invite link generation | Game project |
+| `AppsFlyerCredentialsSyncController.cs` | Uses game's server endpoints | Game project |
+| `OneSignalCredentialsSyncController.cs` | Uses game's server endpoints | Game project |
+| `AdPlacementHandler/*` (5 files) | Game-specific ad placement logic | Game project |
+| `AdAnalytics.cs`, `AdWatchCountAnalytics.cs` | Game-specific analytics | Game project |
+| `PurchaseAnalyticsCache.cs` | Game-specific purchase tracking | Game project |
+| `AdSyncController.cs`, `AdSyncWebTask.cs` | Server sync for ad rewards | Game project |
 
 ### Conditional Compilation
 All SDK wrappers use conditional compilation to avoid compile errors when native SDKs aren't installed:
