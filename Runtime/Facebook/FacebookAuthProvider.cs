@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Spyke.Services.Auth;
 using UnityEngine;
@@ -79,7 +80,7 @@ namespace Spyke.SDKs.Facebook
 #endif
         }
 
-        public UniTask<bool> InitializeAsync(string appId = null, string clientToken = null)
+        public UniTask<bool> InitializeAsync(string appId = null, string clientToken = null, CancellationToken cancellationToken = default)
         {
 #if FACEBOOK_SDK && !UNITY_STANDALONE
             _appId = appId;
@@ -102,7 +103,7 @@ namespace Spyke.SDKs.Facebook
 #endif
         }
 
-        public UniTask<FacebookAuthResult> LoginAsync()
+        public UniTask<FacebookAuthResult> LoginAsync(CancellationToken cancellationToken = default)
         {
 #if FACEBOOK_SDK && !UNITY_STANDALONE
             return LoginInternalAsync(new[] { "public_profile" });
@@ -112,7 +113,7 @@ namespace Spyke.SDKs.Facebook
 #endif
         }
 
-        public UniTask<FacebookAuthResult> LoginWithFriendsPermissionAsync()
+        public UniTask<FacebookAuthResult> LoginWithFriendsPermissionAsync(CancellationToken cancellationToken = default)
         {
 #if FACEBOOK_SDK && !UNITY_STANDALONE
             return LoginInternalAsync(new[] { "public_profile", "user_friends" });
@@ -172,7 +173,7 @@ namespace Spyke.SDKs.Facebook
         }
 #endif
 
-        public UniTask<FacebookAuthResult> RefreshTokenAsync()
+        public UniTask<FacebookAuthResult> RefreshTokenAsync(CancellationToken cancellationToken = default)
         {
 #if FACEBOOK_SDK && !UNITY_STANDALONE
             if (!FB.IsInitialized || !FB.IsLoggedIn)

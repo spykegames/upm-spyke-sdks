@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 
 namespace Spyke.SDKs.IAP
@@ -37,7 +38,8 @@ namespace Spyke.SDKs.IAP
         /// <summary>
         /// Initialize async with product catalog.
         /// </summary>
-        UniTask<bool> InitializeAsync(IEnumerable<IAPProduct> products);
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        UniTask<bool> InitializeAsync(IEnumerable<IAPProduct> products, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a product by ID.
@@ -57,7 +59,8 @@ namespace Spyke.SDKs.IAP
         /// <summary>
         /// Purchase a product async by ID.
         /// </summary>
-        UniTask<IAPResult> PurchaseAsync(string productId);
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        UniTask<IAPResult> PurchaseAsync(string productId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Restore previous purchases (iOS).
@@ -67,7 +70,8 @@ namespace Spyke.SDKs.IAP
         /// <summary>
         /// Restore purchases async.
         /// </summary>
-        UniTask<bool> RestorePurchasesAsync();
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        UniTask<bool> RestorePurchasesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Confirm a pending purchase (for deferred purchases).

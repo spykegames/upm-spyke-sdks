@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -82,7 +83,7 @@ namespace Spyke.SDKs.Ads.AppLovin
             ShowAsync(placement).Forget();
         }
 
-        public async UniTask<AdResult> ShowAsync(string placement)
+        public async UniTask<AdResult> ShowAsync(string placement, CancellationToken cancellationToken = default)
         {
             if (!_isReady)
             {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -48,7 +49,7 @@ namespace Spyke.SDKs.IAP
             InitializeAsync(products).Forget();
         }
 
-        public async UniTask<bool> InitializeAsync(IEnumerable<IAPProduct> products)
+        public async UniTask<bool> InitializeAsync(IEnumerable<IAPProduct> products, CancellationToken cancellationToken = default)
         {
             if (_isReady) return true;
             if (_isInitializing)
@@ -110,7 +111,7 @@ namespace Spyke.SDKs.IAP
             PurchaseAsync(productId).Forget();
         }
 
-        public async UniTask<IAPResult> PurchaseAsync(string productId)
+        public async UniTask<IAPResult> PurchaseAsync(string productId, CancellationToken cancellationToken = default)
         {
             if (!_isReady)
             {
@@ -146,7 +147,7 @@ namespace Spyke.SDKs.IAP
             RestorePurchasesAsync().Forget();
         }
 
-        public async UniTask<bool> RestorePurchasesAsync()
+        public async UniTask<bool> RestorePurchasesAsync(CancellationToken cancellationToken = default)
         {
             if (!_isReady) return false;
 

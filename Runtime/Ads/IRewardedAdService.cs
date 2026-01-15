@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 
 namespace Spyke.SDKs.Ads
@@ -61,6 +62,7 @@ namespace Spyke.SDKs.Ads
         /// <summary>
         /// Show a rewarded ad async.
         /// </summary>
-        UniTask<AdResult> ShowAsync(string placement);
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        UniTask<AdResult> ShowAsync(string placement, CancellationToken cancellationToken = default);
     }
 }
